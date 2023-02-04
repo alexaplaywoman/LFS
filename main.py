@@ -67,7 +67,7 @@ class shellLFS(cmd2.Cmd):
             log.fatal('Error inesperado al agregar log')
     
    
-    def logRegistroDiario(message):
+    def logRegistroDiario(self,message):
         try:
             #creamos/llamamos al log
             log = logging.getLogger('registroDiario')
@@ -229,10 +229,12 @@ class shellLFS(cmd2.Cmd):
         self.archivoHistorial(name)
         self.logRegistroDiario(name)
         print(name)
-        dst_dir = path.abspath(phrase)
         try:
-            if path.exists(dst_dir):
-                os.chdir(dst_dir)
+            os.chdir(phrase)
+            username = getpass.getuser() #user 
+            home_dir = os.getcwd() #cwd
+            hostname = socket.gethostname() #hostname           
+            
         except Exception :
             msg = "ir: Error al cambiar de directorio"
             self.logSystemError(msg)
@@ -330,10 +332,9 @@ class shellLFS(cmd2.Cmd):
         self.logRegistroDiario(name)
         print(name)
         pid = argument.split(' ',2)
-        print(pid)
+        
         int_pid = int(pid[0])
         int_proc = int(pid[1])
-        print(type(int_pid),type(int_proc))
         try:
             if int_pid == -19:
                 os.kill(int_proc, signal.SIGSTOP)
@@ -347,7 +348,7 @@ class shellLFS(cmd2.Cmd):
         except:
             print("\nSigue en proceso")
             print("Process ID:", os.getpid())
-            msg = "sgrep: Error al matar"
+            msg = "matar1: Error al matar"
             self.logSystemError(msg)
             print(msg) 
             
@@ -357,7 +358,7 @@ class shellLFS(cmd2.Cmd):
         name = "historial"
         self.archivoHistorial(name)
         self.logRegistroDiario(name)
-        f = open("var/log/shell/historial.log","r")
+        f = open("/var/log/shell/historial.log","r")
         line_num = 0
         for line in f:
             line_num += 1 
