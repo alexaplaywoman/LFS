@@ -13,7 +13,7 @@ import logging
 
 
 from pathlib import Path
-from os import path, system
+from os import path
 
 
 from datetime import datetime
@@ -23,6 +23,8 @@ import os
 import sys
 import pwd
 
+
+#!/usr/bin/env python
 """A simple shell application."""
 
 
@@ -32,13 +34,14 @@ class shellLFS(cmd2.Cmd):
         username = getpass.getuser() #user 
         home_dir = os.getcwd() #cwd
         hostname = socket.gethostname() #hostname
-     
+      #  self.colors = mutilities.colors()
         
         self.default_to_shell = True #use default shell commands
         self.prompt =f"{username}@{hostname}:{home_dir}$"
         self.maxrepeats = 3
         self.poutput("\nSHELL ORTIZ")
 
+###LOGS UTILIZADOS
     def logSystemError(self,message):
         try:
                #creamos/llamamos al log
@@ -97,15 +100,7 @@ class shellLFS(cmd2.Cmd):
             file.close()
         except Exception as f:
             print(f)
-    
-    def do_historial(self,arg):
-        name = "historial"
-        self.archivoHistorial(name)
-        f = open("var/log/shell/historial.log","r")
-        line_num = 0
-        for line in f:
-            line_num += 1 
-            print(line_num,line)
+
 
 
     
@@ -315,6 +310,10 @@ class shellLFS(cmd2.Cmd):
             self.logSystemError(msg)
             print(msg)    
 
+
+        
+###4.12. Terminar procesos con señales determinadas - kill
+###input con el formato: PID(s) señal
     def do_matar1(self,argument):
         name = f"matar {argument}"
         self.archivoHistorial(name)
@@ -340,7 +339,15 @@ class shellLFS(cmd2.Cmd):
             msg = "sgrep: Error al matar"
             self.logSystemError(msg)
             print(msg) 
-        
+###4.14. Imprimir un historial de comandos - history 
+    def do_historial(self,arg):
+        name = "historial"
+        self.archivoHistorial(name)
+        f = open("var/log/shell/historial.log","r")
+        line_num = 0
+        for line in f:
+            line_num += 1 
+            print(line_num,line)
     
 if __name__ == '__main__':
     c = shellLFS()
