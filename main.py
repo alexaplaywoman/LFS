@@ -48,7 +48,7 @@ class shellLFS(cmd2.Cmd):
             log = logging.getLogger('systemError')
             log.setLevel(logging.ERROR)
                 #creamos el archivo donde se van a almacenar los registros
-            direccion = 'var/log/shell/sistema_error.log' #agg /var para lfs
+            direccion = '/var/log/shell/sistema_error.log' #agg /var para lfs
             open(direccion,'a')
             fileHandler = logging.FileHandler(direccion, mode='a')
             fileHandler.setLevel(logging.ERROR)
@@ -66,14 +66,14 @@ class shellLFS(cmd2.Cmd):
         except:
             log.fatal('Error inesperado al agregar log')
     
-    # Funcion para generar log de movimientos de usuario -> comandos.log
+   
     def logRegistroDiario(message):
         try:
             #creamos/llamamos al log
             log = logging.getLogger('registroDiario')
             log.setLevel(logging.DEBUG)
             #creamos el archivo donde se van a almacenar los registros
-            direccion1 = 'var/log/shell/comandos.log' #agg /var para lfs
+            direccion1 = '/var/log/shell/comandos.log' #agg /var para lfs
             open(direccion1,'a')
             fileHandler = logging.FileHandler(direccion1, mode='a')
             fileHandler.setLevel(logging.DEBUG)
@@ -94,7 +94,7 @@ class shellLFS(cmd2.Cmd):
     def archivoHistorial(self,message):
         try:
                 #creamos el archivo donde se van a almacenar los registros
-            direc = 'var/log/shell/historial.log' #agg /var para lfs
+            direc = '/var/log/shell/historial.log' #agg /var para lfs
             file = open(direc,'a')
             file.write(str(message) + '\n')
             file.close()
