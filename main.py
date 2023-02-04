@@ -111,6 +111,7 @@ class shellLFS(cmd2.Cmd):
     def do_copiar(self, phrase):
         name = f"copiar {phrase}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         space = " "
         new_arr = [i for i in phrase.split() if not space in i] #coloco cada palabra en un indice
@@ -138,6 +139,7 @@ class shellLFS(cmd2.Cmd):
     def do_mover(self,phrase):
         name = f"mover {phrase}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         space = " "
         new_arr = [i for i in phrase.split() if not space in i]  
@@ -162,6 +164,7 @@ class shellLFS(cmd2.Cmd):
     def do_renombrar(self,phrase):
         name = f"renombrar {phrase}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         space = " "
         new_arr = [i for i in phrase.split() if not space in i]
@@ -189,6 +192,7 @@ class shellLFS(cmd2.Cmd):
     def do_listar(self, argument):
         name = f"listar {argument}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         try:
             if argument == "":
@@ -207,6 +211,7 @@ class shellLFS(cmd2.Cmd):
     def do_creardir(self, phrase):
         name = f"creardir {phrase}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         space = " "
         try:
@@ -222,6 +227,7 @@ class shellLFS(cmd2.Cmd):
     def do_ir(self,phrase):
         name = f"ir {phrase}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         dst_dir = path.abspath(phrase)
         try:
@@ -237,6 +243,7 @@ class shellLFS(cmd2.Cmd):
     def do_permisos(self,argument):
         name = f"permisos {argument}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         new_arr = [i for i in argument.split() if not " " in i]
         path = new_arr [-1]
@@ -253,6 +260,7 @@ class shellLFS(cmd2.Cmd):
     def do_propietario(self,argument):
         name = f"propietario {argument}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         new_arr = [i for i in argument.split() if not " " in i]
         p = new_arr[0].split(":")
@@ -275,6 +283,7 @@ class shellLFS(cmd2.Cmd):
     def do_printdir(self,c):
         name = "printdir"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         try:
             cwd=os.getcwd()             #obtener diretorio actual
@@ -291,6 +300,7 @@ class shellLFS(cmd2.Cmd):
     def do_sgrep(self,argument):
         name = f"sgrep {argument}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         argnt = [i for i in argument.split() if not " " in i]
         file_one = open(f"{argnt[-1]}.txt", "r")
@@ -317,6 +327,7 @@ class shellLFS(cmd2.Cmd):
     def do_matar1(self,argument):
         name = f"matar {argument}"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         print(name)
         pid = argument.split(' ',2)
         print(pid)
@@ -339,10 +350,13 @@ class shellLFS(cmd2.Cmd):
             msg = "sgrep: Error al matar"
             self.logSystemError(msg)
             print(msg) 
+            
+            
 ###4.14. Imprimir un historial de comandos - history 
     def do_historial(self,arg):
         name = "historial"
         self.archivoHistorial(name)
+        self.logRegistroDiario(name)
         f = open("var/log/shell/historial.log","r")
         line_num = 0
         for line in f:
