@@ -1,8 +1,8 @@
 from lib2to3.pytree import convert
-import pathlib
+
 from posixpath import splitdrive
 import signal
-import subprocess
+
 from datetime import datetime
 import cmd2
 import shutil
@@ -10,38 +10,19 @@ import getpass
 import socket
 import re
 import logging
-import datetime
+
 
 from pathlib import Path
 from os import path, system
-from cmd2 import Cmd2ArgumentParser, with_argparser
-import psutil
+
+
 from datetime import datetime
-import hashlib
-import base64
-import ftplib
-import string
-import time
 
 import grp
 import os
 import sys
 import pwd
-import crypt
 
-OKBLUE = '\033[94m'
-OKCYAN = '\033[96m'
-WHITE = '\033[37m'
-MAGENTA='\033[35m'
-HEADER = '\033[95m'
-OKGREEN = '\033[92m'
-WARNING = '\033[93m'
-FAIL = '\033[91m'
-ENDC = '\033[0m'
-BOLD = '\033[1m'
-UNDERLINE = '\033[4m'
-
-#!/usr/bin/env python
 """A simple shell application."""
 
 
@@ -51,7 +32,7 @@ class shellLFS(cmd2.Cmd):
         username = getpass.getuser() #user 
         home_dir = os.getcwd() #cwd
         hostname = socket.gethostname() #hostname
-      #  self.colors = mutilities.colors()
+     
         
         self.default_to_shell = True #use default shell commands
         self.prompt =f"{username}@{hostname}:{home_dir}$"
